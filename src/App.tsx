@@ -10,13 +10,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Layout from "./Layout";
 import { broadcastQueryClient } from "@tanstack/query-broadcast-client-experimental";
 import "./styles.css";
-import { asyncStoragePersister } from "./storage/asyncStoragePersister";
+import { createSharedWorkerStoragePersister } from "./storage/asyncStoragePersister";
+import { storage } from "./storage/storage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      gcTime: 1000 * 60 * 60 * 24, // 24 hours
-      staleTime: 1000 * 60 * 60 * 24, // 24 hours
+      staleTime: 1000 * 300, // 5 minuts
     },
   },
 });
@@ -26,8 +26,13 @@ broadcastQueryClient({
   broadcastChannel: "my-app",
 });
 
+const sharedWorkerStorage = storage;
+const persister = createSharedWorkerStoragePersister({
+  storage: sharedWorkerStorage,
+});
+
 const persistOptions: OmitKeyof<PersistQueryClientOptions, "queryClient"> = {
-  persister: asyncStoragePersister,
+  persister: persister,
   buster: "my-cool-app-version",
 };
 

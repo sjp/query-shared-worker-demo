@@ -1,24 +1,24 @@
 // storage.worker.ts
 import { expose } from "comlink";
-import type { AsyncStorage } from "@tanstack/react-query-persist-client";
+import type {
+  AsyncStorage,
+  PersistedClient,
+} from "@tanstack/react-query-persist-client";
 
 const sharedWorkerGlobalScope: SharedWorkerGlobalScope = self as any;
 
-const storageMap = new Map<string, unknown>();
+const storageMap = new Map<string, PersistedClient>();
 
-const storage: AsyncStorage = {
-  getItem: (key: string): string => {
-    const result = storageMap.get(key) as string;
-    console.log({ op: "get", key, value: result });
-    return result;
+const storage: AsyncStorage<PersistedClient> = {
+  getItem: (key: string): PersistedClient => {
+    const result = storageMap.get(key);
+    return result as PersistedClient;
   },
-  setItem: (key: string, value: string): unknown => {
-    console.log({ op: "set", key, value });
+  setItem: (key: string, value: PersistedClient): unknown => {
     storageMap.set(key, value);
     return value;
   },
   removeItem: (key: string): void => {
-    console.log("removeItem: " + key);
     storageMap.delete(key);
   },
 };
