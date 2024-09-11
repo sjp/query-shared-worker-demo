@@ -1,4 +1,3 @@
-// storage.worker.ts
 import { expose } from "comlink";
 import type {
   AsyncStorage,

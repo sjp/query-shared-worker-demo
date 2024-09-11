@@ -11,12 +11,15 @@ import Layout from "./Layout";
 import { broadcastQueryClient } from "@tanstack/query-broadcast-client-experimental";
 import "./styles.css";
 import { createSharedWorkerStoragePersister } from "./storage/asyncStoragePersister";
-import { storage } from "./storage/storage";
+import {
+  createSharedWorker,
+  createSharedStorage as createSharedWorkerStorage,
+} from "./storage/storage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 300, // 5 minuts
+      staleTime: 1000 * 60 * 5, // 5 minutes
     },
   },
 });
@@ -26,9 +29,11 @@ broadcastQueryClient({
   broadcastChannel: "my-app",
 });
 
-const sharedWorkerStorage = storage;
+const sharedWorker = createSharedWorker();
+const storage = createSharedWorkerStorage(sharedWorker);
 const persister = createSharedWorkerStoragePersister({
-  storage: sharedWorkerStorage,
+  storage: storage,
+  key: "my-cool-app",
 });
 
 const persistOptions: OmitKeyof<PersistQueryClientOptions, "queryClient"> = {

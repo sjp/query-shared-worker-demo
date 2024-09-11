@@ -5,9 +5,20 @@ import type {
   PersistedClient,
 } from "@tanstack/react-query-persist-client";
 
-const worker = new SharedWorker(
-  new URL("./storage.worker.ts", import.meta.url),
-  { type: "module" }
-);
+export const createSharedStorage = (
+  worker: SharedWorker
+): AsyncStorage<PersistedClient> => {
+  return wrap(worker.port);
+};
 
-export const storage: AsyncStorage<PersistedClient> = wrap(worker.port);
+const defaultWorkerOptions: WorkerOptions = { type: "module" };
+
+export const createSharedWorker = (
+  options?: string | WorkerOptions
+): SharedWorker => {
+  const opts = options ?? defaultWorkerOptions;
+  return new SharedWorker(
+    new URL("./storage.worker.ts", import.meta.url),
+    opts
+  );
+};
