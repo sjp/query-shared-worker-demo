@@ -17,6 +17,8 @@ const noopPersister: Persister = {
   removeClient: noop,
 };
 
+const isSharedWorkerAvailable = () => !!window && !!window.SharedWorker;
+
 const STORAGE_KEY = "REACT_QUERY_SHARED_WORKER_CACHE";
 
 interface CreateSharedWorkerStoragePersisterOptions {
@@ -38,7 +40,7 @@ export const createSharedWorkerStoragePersister = (
 ): Persister => {
   const { storage, key } = options;
 
-  if (storage === null) {
+  if (storage === null || !isSharedWorkerAvailable()) {
     return noopPersister;
   }
 
