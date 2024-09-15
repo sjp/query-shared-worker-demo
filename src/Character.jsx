@@ -16,14 +16,14 @@ import fetch from './fetch'
 
 function Character() {
   const { characterId } = useParams()
-  const { status, data } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ['character', characterId],
     queryFn: () =>
       fetch(`https://rickandmortyapi.com/api/character/${characterId}`),
   })
 
-  if (status === 'pending') return <p>Loading...</p>
-  if (status === 'error') return <p>Error :(</p>
+  if (isPending) return <p>Loading...</p>
+  if (isError) return <p>Error :(</p>
 
   const locationUrlPars = data.location.url.split('/').filter(Boolean)
   const locationId = locationUrlPars[locationUrlPars.length - 1]

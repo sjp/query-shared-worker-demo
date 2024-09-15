@@ -37,7 +37,7 @@ const persister = createSharedWorkerStoragePersister({
 });
 
 const persistOptions: OmitKeyof<PersistQueryClientOptions, "queryClient"> = {
-  persister: persister,
+  persister,
   buster: "my-cool-app-version",
 };
 
@@ -59,23 +59,9 @@ export default function App() {
 
 const theme = createTheme({
   typography: {
-    h1: {
-      fontFamily: "Roboto Mono, monospace",
-    },
-    h2: {
-      fontFamily: "Roboto Mono, monospace",
-    },
-    h3: {
-      fontFamily: "Roboto Mono, monospace",
-    },
-    h4: {
-      fontFamily: "Roboto Mono, monospace",
-    },
-    h5: {
-      fontFamily: "Roboto Mono, monospace",
-    },
-    h6: {
-      fontFamily: "Roboto Mono, monospace",
+    allVariants: {
+      fontFamily: "monospace",
     },
   },
+  palette: { mode: "dark" },
 });
