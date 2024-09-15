@@ -10,11 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Layout from "./Layout";
 import { broadcastQueryClient } from "@tanstack/query-broadcast-client-experimental";
 import "./styles.css";
-import { createSharedWorkerStoragePersister } from "./storage/asyncStoragePersister";
-import {
-  createSharedWorker,
-  createSharedStorage as createSharedWorkerStorage,
-} from "./storage/storage";
+import { createSharedWorkerPersister } from "@sjpnz/query-shared-worker-persister";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,19 +22,12 @@ const queryClient = new QueryClient({
 
 broadcastQueryClient({
   queryClient,
-  broadcastChannel: "my-app",
 });
 
-const sharedWorker = createSharedWorker();
-const storage = createSharedWorkerStorage(sharedWorker);
-const persister = createSharedWorkerStoragePersister({
-  storage: storage,
-  key: "my-cool-app",
-});
+const sharedWorkerPersister = createSharedWorkerPersister();
 
 const persistOptions: OmitKeyof<PersistQueryClientOptions, "queryClient"> = {
-  persister,
-  buster: "my-cool-app-version",
+  persister: sharedWorkerPersister,
 };
 
 export default function App() {
