@@ -12,6 +12,16 @@ import { broadcastQueryClient } from "@tanstack/query-broadcast-client-experimen
 import "./styles.css";
 import { createSharedWorkerPersister } from "@sjpnz/query-shared-worker-persister";
 
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "monospace",
+    },
+  },
+  colorSchemes: { dark: true, light: true },
+  defaultColorScheme: 'dark'
+});
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -45,12 +55,3 @@ export default function App() {
     </PersistQueryClientProvider>
   );
 }
-
-const theme = createTheme({
-  typography: {
-    allVariants: {
-      fontFamily: "monospace",
-    },
-  },
-  palette: { mode: "dark" },
-});
