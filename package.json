@@ -10,9 +10,9 @@
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.0",
-    "@mui/styles": "^6.1.0",
-    "@sjpnz/query-shared-worker-persister": "^0.0.1-alpha3",
+    "@mui/material": "^6.1.1",
+    "@mui/styles": "^6.1.1",
+    "@sjpnz/query-shared-worker-persister": "^0.0.1-alpha4",
     "@tanstack/query-broadcast-client-experimental": "^5.56.2",
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-query-devtools": "^5.56.2",
