@@ -25,11 +25,10 @@ export default function Layout() {
       </nav>
       <main className={classes.main}>
         <Routes>
-          <Route exact path="/episodes" element={<Episodes />} />
-          <Route exact path="/episodes/:episodeId" element={<Episode />} />
-          <Route exact path="/characters" element={<Characters />} />
+          <Route path="/episodes" element={<Episodes />} />
+          <Route path="/episodes/:episodeId" element={<Episode />} />
+          <Route path="/characters" element={<Characters />} />
           <Route
-            exact
             path="/characters/:characterId"
             element={<Character />}
           />
