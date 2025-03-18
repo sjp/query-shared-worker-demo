@@ -42,9 +42,11 @@ persistQueryClient({
 });
 
 export default function App() {
+  const basePath = import.meta.env.VITE_PUBLIC_BASE_PATH || "/";
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename={basePath}>
         <ThemeProvider theme={theme}>
           <Layout />
           <ReactQueryDevtools initialIsOpen />
