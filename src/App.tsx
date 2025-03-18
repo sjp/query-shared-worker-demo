@@ -8,6 +8,17 @@ import Layout from "./Layout";
 import { broadcastQueryClient } from "@tanstack/query-broadcast-client-experimental";
 import "./styles.css";
 import { createSharedWorkerPersister } from "@sjpnz/query-shared-worker-persister";
+import { lazy } from "react";
+
+const ReactQueryDevtoolsProduction = lazy(() =>
+  import('@tanstack/react-query-devtools/production').then((d) => ({
+    default: d.ReactQueryDevtools,
+  })),
+)
+
+const QueryDevtools = import.meta.env.DEV
+  ? ReactQueryDevtools
+  : ReactQueryDevtoolsProduction;
 
 const theme = createTheme({
   typography: {
@@ -55,7 +66,7 @@ export default function App() {
       <Router basename={basePath}>
         <ThemeProvider theme={theme}>
           <Layout />
-          <ReactQueryDevtools initialIsOpen />
+          <QueryDevtools initialIsOpen  />
         </ThemeProvider>
       </Router>
     </QueryClientProvider>
