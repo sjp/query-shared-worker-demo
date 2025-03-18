@@ -19,6 +19,9 @@ const theme = createTheme({
   defaultColorScheme: 'dark'
 });
 
+// Define a unique identifier for your application
+const APP_NAME = "TANSTACK_QUERY_RICK_MORTY_DEMO_APP_SJP_v0.0.1";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -30,9 +33,12 @@ const queryClient = new QueryClient({
 // enable updates to be shared across tabs
 broadcastQueryClient({
   queryClient,
+  broadcastChannel: APP_NAME,
 });
 
-const sharedWorkerPersister = createSharedWorkerPersister();
+const sharedWorkerPersister = createSharedWorkerPersister({
+  key: APP_NAME,
+});
 
 // enable fresh tabs to load the shared query cache
 // while still receiving updates via the broadcastQueryClient
