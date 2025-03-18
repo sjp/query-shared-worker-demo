@@ -7,6 +7,10 @@ This repository is primary used to demonstrate how a cache can be shared across 
 
 The code itself is largely borrowed from the [TanStack Query repository](https://github.com/TanStack/query/tree/main/examples/react/rick-morty), with some modifications to support the cache sharing.
 
+## Demo
+
+To view the demo app in action, see: https://sjp.co.nz/projects/query-shared-worker-persister/demo
+
 ## Usage
 
 To run this example:
