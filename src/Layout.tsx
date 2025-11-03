@@ -48,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "Field",
-    "& button": {
-      margin: theme.spacing(1),
-    },
+    backgroundColor: "Field"
   },
 }));
