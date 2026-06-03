@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.2",
     "@mui/styles": "^6.5.0",
-    "@sjpnz/query-shared-worker-persister": "^0.1.1",
+    "@sjpnz/query-shared-worker-persister": "^0.2.0",
     "@tanstack/query-broadcast-client-experimental": "^5.100.4",
     "@tanstack/react-query": "^5.100.4",
     "@tanstack/react-query-devtools": "^5.100.4",
