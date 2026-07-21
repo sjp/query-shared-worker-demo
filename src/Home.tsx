@@ -1,12 +1,7 @@
-import React from 'react'
-import { Typography } from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import { Link } from '@mui/material'
+import { Typography, Link, Box } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
 export default function Home() {
-  const classes = useStyles()
-
   return (
     <div>
       <Typography variant="h2">React Query Demo</Typography>
@@ -14,7 +9,7 @@ export default function Home() {
       <Typography variant="subtitle2">
         (Built by <a href="https://twitter.com/axelfuh">@axelfuh</a>)
       </Typography>
-      <section className={classes.main}>
+      <Box component="section" sx={{ my: '44px', '& p': { m: '12px 0 24px' } }}>
         <Typography variant="h5">Why React Query?</Typography>
         <Typography variant="body1">
           In this demo you will be able to see how React Query is a significant
@@ -41,16 +36,7 @@ export default function Home() {
           </Link>
           !
         </Typography>
-      </section>
+      </Box>
     </div>
   )
 }
-
-const useStyles = makeStyles(() => ({
-  main: {
-    margin: '44px 0',
-    '& p': {
-      margin: '12px 0 24px',
-    },
-  },
-}))
