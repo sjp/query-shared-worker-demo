@@ -49,6 +49,7 @@ broadcastQueryClient({
 
 const sharedWorkerPersister = createSharedWorkerPersister({
   key: APP_NAME,
+  namespace: APP_NAME,
 });
 
 // enable fresh tabs to load the shared query cache
@@ -59,11 +60,9 @@ persistQueryClient({
 });
 
 export default function App() {
-  const basePath = import.meta.env.VITE_PUBLIC_BASE_PATH || "/";
-
   return (
     <QueryClientProvider client={queryClient}>
-      <Router basename={basePath}>
+      <Router basename={import.meta.env.BASE_URL}>
         <ThemeProvider theme={theme}>
           <Layout />
           <QueryDevtools initialIsOpen  />
