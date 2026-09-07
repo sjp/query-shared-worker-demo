@@ -1,0 +1,62 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [24, 26, latest]
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment: live
+    needs: build
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: latest
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      # The build is keyed to VITE_PUBLIC_BASE_PATH, so the directory it is
+      # copied into has to be the same path under the site root. Deriving the
+      # target from .env.production keeps the two from drifting apart.
+      - name: Resolve deploy target
+        env:
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
+        run: |
+          base="$(sed -n 's/^VITE_PUBLIC_BASE_PATH=//p' .env.production)"
+          echo "DEPLOY_TARGET=${REMOTE_DIR%/}${base}" >> "$GITHUB_ENV"
+
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v6.0.3
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          TARGET: ${{ env.DEPLOY_TARGET }}
+          SOURCE: "dist/"
+          ARGS: "--delete"
