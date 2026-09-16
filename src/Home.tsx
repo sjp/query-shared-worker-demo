@@ -1,5 +1,5 @@
-import { Typography, Link, Box } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Typography, Link, Box } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -9,28 +9,28 @@ export default function Home() {
       <Typography variant="subtitle2">
         (Built by <a href="https://twitter.com/axelfuh">@axelfuh</a>)
       </Typography>
-      <Box component="section" sx={{ my: '44px', '& p': { m: '12px 0 24px' } }}>
+      <Box component="section" sx={{ my: "44px", "& p": { m: "12px 0 24px" } }}>
         <Typography variant="h5">Why React Query?</Typography>
         <Typography variant="body1">
-          In this demo you will be able to see how React Query is a significant
-          improvement over <strong>redux</strong>, <strong>mobx</strong>, and
-          any other general-purpose state container.
+          In this demo you will be able to see how React Query is a significant improvement over{" "}
+          <strong>redux</strong>, <strong>mobx</strong>, and any other general-purpose state
+          container.
         </Typography>
         <Typography variant="body1">
-          No reducers, thunks, or sagas. No ES6 models to maintain in order to
-          tag them as observable.
+          No reducers, thunks, or sagas. No ES6 models to maintain in order to tag them as
+          observable.
         </Typography>
         <Typography variant="body1">
-          Simply associate a key with your fetch call and let{' '}
-          <strong>React Query</strong> handle the rest.
+          Simply associate a key with your fetch call and let <strong>React Query</strong> handle
+          the rest.
         </Typography>
         <Typography variant="h5">Ready to get started?</Typography>
         <Typography variant="body1">
-          Check out the{' '}
+          Check out the{" "}
           <Link component={RouterLink} to="/episodes">
             Episodes
-          </Link>{' '}
-          and{' '}
+          </Link>{" "}
+          and{" "}
           <Link component={RouterLink} to="/characters">
             Characters
           </Link>
@@ -38,5 +38,5 @@ export default function Home() {
         </Typography>
       </Box>
     </div>
-  )
+  );
 }

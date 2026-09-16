@@ -11,14 +11,12 @@ import { createSharedWorkerPersister } from "@sjpnz/query-shared-worker-persiste
 import { lazy } from "react";
 
 const ReactQueryDevtoolsProduction = lazy(() =>
-  import('@tanstack/react-query-devtools/production').then((d) => ({
+  import("@tanstack/react-query-devtools/production").then((d) => ({
     default: d.ReactQueryDevtools,
   })),
-)
+);
 
-const QueryDevtools = import.meta.env.DEV
-  ? ReactQueryDevtools
-  : ReactQueryDevtoolsProduction;
+const QueryDevtools = import.meta.env.DEV ? ReactQueryDevtools : ReactQueryDevtoolsProduction;
 
 const theme = createTheme({
   typography: {
@@ -27,7 +25,7 @@ const theme = createTheme({
     },
   },
   colorSchemes: { dark: true, light: true },
-  defaultColorScheme: 'dark'
+  defaultColorScheme: "dark",
 });
 
 // Define a unique identifier for your application
@@ -54,9 +52,9 @@ const sharedWorkerPersister = createSharedWorkerPersister({
 
 // enable fresh tabs to load the shared query cache
 // while still receiving updates via the broadcastQueryClient
-persistQueryClient({
+void persistQueryClient({
   queryClient,
-  persister: sharedWorkerPersister
+  persister: sharedWorkerPersister,
 });
 
 export default function App() {
@@ -65,7 +63,7 @@ export default function App() {
       <Router basename={import.meta.env.BASE_URL}>
         <ThemeProvider theme={theme}>
           <Layout />
-          <QueryDevtools initialIsOpen  />
+          <QueryDevtools initialIsOpen />
         </ThemeProvider>
       </Router>
     </QueryClientProvider>

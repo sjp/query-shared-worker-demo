@@ -1,20 +1,19 @@
-import React from 'react'
-import { Typography, Link } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import fetch from './fetch'
+import { Typography, Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import fetch, { type Episode, type Paged } from "./fetch";
 
 export default function Episodes() {
   const { data, status } = useQuery({
-    queryKey: ['episodes'],
-    queryFn: () => fetch('https://rickandmortyapi.com/api/episode'),
-  })
+    queryKey: ["episodes"],
+    queryFn: () => fetch<Paged<Episode>>("https://rickandmortyapi.com/api/episode"),
+  });
 
-  if (status === 'pending') {
-    return <p>Loading...</p>
+  if (status === "pending") {
+    return <p>Loading...</p>;
   }
-  if (status === 'error') {
-    return <p>Error :(</p>
+  if (status === "error") {
+    return <p>Error :(</p>;
   }
 
   return (
@@ -24,11 +23,11 @@ export default function Episodes() {
         <article key={episode.id}>
           <Link component={RouterLink} to={`/episodes/${episode.id}`}>
             <Typography variant="h6">
-              {episode.episode} - {episode.name} <em>{episode.airDate}</em>
+              {episode.episode} - {episode.name} <em>{episode.air_date}</em>
             </Typography>
           </Link>
         </article>
       ))}
     </div>
-  )
+  );
 }

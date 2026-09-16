@@ -9,7 +9,10 @@ import Home from "./Home";
 export default function Layout() {
   return (
     <div className="App">
-      <Box component="nav" sx={{ mx: 'auto', display: 'flex', justifyContent: 'center', backgroundColor: 'Field' }}>
+      <Box
+        component="nav"
+        sx={{ mx: "auto", display: "flex", justifyContent: "center", backgroundColor: "Field" }}
+      >
         <Link component={RouterLink} to="/">
           <Button color="primary">Home</Button>
         </Link>
@@ -20,15 +23,12 @@ export default function Layout() {
           <Button color="primary">Characters</Button>
         </Link>
       </Box>
-      <Box component="main" sx={{ mx: 'auto', p: '16px' }}>
+      <Box component="main" sx={{ mx: "auto", p: "16px" }}>
         <Routes>
           <Route path="/episodes" element={<Episodes />} />
           <Route path="/episodes/:episodeId" element={<Episode />} />
           <Route path="/characters" element={<Characters />} />
-          <Route
-            path="/characters/:characterId"
-            element={<Character />}
-          />
+          <Route path="/characters/:characterId" element={<Character />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Box>
