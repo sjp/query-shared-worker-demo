@@ -1,11 +1,11 @@
 {
-    "name": "SharedWorker Demo Development",
-    "image": "mcr.microsoft.com/devcontainers/base:trixie",
-	"features": {
-		"ghcr.io/devcontainers/features/node:2": {
-			"version": "26"
-		}
-	},
+  "name": "SharedWorker Demo Development",
+  "image": "mcr.microsoft.com/devcontainers/base:trixie",
+  "features": {
+    "ghcr.io/devcontainers/features/node:2": {
+      "version": "26"
+    }
+  },
 
-    "remoteUser": "vscode"
+  "remoteUser": "vscode"
 }
