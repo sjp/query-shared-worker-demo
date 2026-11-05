@@ -9,7 +9,7 @@ The code itself is largely borrowed from the [TanStack Query repository](https:/
 
 ## Demo
 
-To view the demo app in action, see: https://sjp.co.nz/projects/query-shared-worker-persister/demo
+To view the demo app in action, see: https://sjp.github.io/query-shared-worker-demo/
 
 ## Usage
 
